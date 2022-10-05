@@ -42,20 +42,7 @@ const API_KEY = "AIzaSyB0GNJEcSqRStWF6NNuuy7l5lVlJvlq048";
 //     }      
 //     return true;      
 // }
-
-
-const date = document.getElementById("date").value;
-
-
-function CompareDate(date) {      
-    var dateOne = new Date();       
-    if (dateOne >= date) {    
-        return false;    
-    }
-    else {    
-        return true;   
-    }    
- } 
+ 
 
 document.getElementById("loginForm").addEventListener("submit",(event)=>{
     event.preventDefault()
@@ -96,7 +83,7 @@ function login(){
     const dept = document.getElementById("department").value;
     const doc = document.getElementById("doctor").value;
     console.log(name,email,phone,date,dept,doc);
-    if(email && name && phone && dept!="no" && doc!="no" && CompareDate(date) && phone.length===10 && (emailPattern.test(email) || emailPattern2.test(email)|| emailPattern3.test(email))){
+    if(email && name && phone && dept!="no" && doc!="no" && date && phone.length===10 && (emailPattern.test(email) || emailPattern2.test(email)|| emailPattern3.test(email))){
         document.getElementById("error").innerHTML = "Loading..."
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -125,7 +112,7 @@ function login(){
         document.getElementById("error").innerHTML = "Please select a Service."
     }else if(doc === "no"){
         document.getElementById("error").innerHTML = "Please select a Doctor."
-    }else if(!CompareDate(date)){
+    }else if(!date){
         document.getElementById("error").innerHTML = "You cannot choose the same day or a past date."
     }else{
         document.getElementById("error").innerHTML = "Invalid Details"
