@@ -288,7 +288,7 @@
     
 
     <!-- slider section-->
-    <div class="splide">
+    <div id='services' class="splide">
       <div class="splide__track">
             <ul class="splide__list">
                 <li class="splide__slide"><img src="images/acne.png" alt=""> </li>
@@ -674,8 +674,8 @@ splide.mount();
       </div>
 
       <div>
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.com/maps?q=Green%20Valley%20Apartments%20,%20Indore&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+      </div> 
 
       <div class="container">
         <div class="row mt-5">
@@ -706,25 +706,23 @@ splide.mount();
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form role="form" class="php-email-form">
+            <form id="contact-form"onsubmit="send()" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input type="text" name="cnt-name" class="form-control" id="cnt-name" placeholder="Your Name" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" name="cnt-email" id="cnt-email" placeholder="Your Email" required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <input type="text" class="form-control" name="cnt-subject" id="cnt-subject" placeholder="Subject" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea class="form-control" name="message" id ="cnt-msg"rows="5" placeholder="Message" required></textarea>
               </div>
               <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div id="cnt-form"></div>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
@@ -753,11 +751,11 @@ splide.mount();
           
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        <a href="" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -771,6 +769,7 @@ splide.mount();
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
@@ -783,6 +782,33 @@ splide.mount();
       https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+  <script>
+    document.getElementById("contact-form").addEventListener("submit",(event)=>{
+        event.preventDefault()
+    })
+      function send(){
+          const name = document.getElementById('cnt-name').value;
+          const email = document.getElementById('cnt-email').value;
+          const subject = document.getElementById('cnt-subject').value;
+          const message = document.getElementById('cnt-msg').value;
+          var body='Name: '+name+'<br>Email: '+email+'<br>Subject: '+subject+'<br>Message: '+message;
+          Email.send({
+              SecureToken : "a667d7aa-ea8f-40af-9330-20b4125fd29c",
+              To : "earthencare1@gmail.com",
+              From : "earthencare1@gmail.com",
+              Subject : "Contact Form",
+              Body : body
+          }).then( message =>{
+              if(message=='OK'){
+                  alert('Your mail has been send. Thank you for connecting.');
+              }
+              else{
+                  console.error (message);
+                  alert('There is error at sending message. Please Check your network') 
+              }
+          });
+      }
+  </script>
 
   <script src="firebase.js"></script>
   <script src="auth.js"></script>

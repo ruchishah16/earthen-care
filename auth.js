@@ -1,7 +1,5 @@
 const API_KEY = "AIzaSyB0GNJEcSqRStWF6NNuuy7l5lVlJvlq048";
 
-
-
 // function validatedate(dateString){      
 //     let dateformat = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;      
           
@@ -63,12 +61,33 @@ document.getElementById("loginForm").addEventListener("submit",(event)=>{
     event.preventDefault()
 })
 
+function sendMail(){
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    var body = 'Hello '+name+',\nThank You for using EarthenCare Services. We will get back to you soon.'
+    Email.send({
+        SecureToken : "a667d7aa-ea8f-40af-9330-20b4125fd29c",
+        To : email,
+        From : "earthencare1@gmail.com",
+        Subject : "Appoimtment Booked",
+        Body : body
+    }).then( message =>{
+        if(message=='OK'){
+            alert('Kindly Check your Mail. Thank you for using EarthenCare.');
+        }
+        else{
+            console.error (message);
+            alert('There is error at sending message. ') 
+        }
+    });
+}
+
 
 function login(){
     let emailPattern = new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
     let emailPattern2 = new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+\.[A-Za-z]+$/);
     let emailPattern3 = new RegExp(/^[a-zA-Z0-9]+\.+[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]/);
-    let datePattern = new RegExp(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/);
+    // let datePattern = new RegExp(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/);
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -85,12 +104,13 @@ function login(){
             .signInWithPopup(provider)
             .then((result) => {
                 if (result.credential) {
-                /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
-                var token = credential.accessToken;
+                    /** @type {firebase.auth.OAuthCredential} */
+                    var credential = result.credential;
+                    var token = credential.accessToken;
                 }
                 var user = result.user;
-                console.log(user);
+                // console.log(user);
+                sendMail();
                 document.getElementById("error").innerHTML = "Your appointment request has been sent successfully. Thank you!"
             }).catch((error)=>{
                 document.getElementById("error").innerHTML = error.message
