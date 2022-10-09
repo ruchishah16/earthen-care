@@ -768,48 +768,16 @@ splide.mount();
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://smtpjs.com/v3/smtp.js"></script>
 
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
 
-  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
-
   <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
-  <script>
-    date.min = new Date().toLocaleDateString('en-ca');
-    document.getElementById("contact-form").addEventListener("submit",(event)=>{
-        event.preventDefault()
-    })
-      function send(){
-          const name = document.getElementById('cnt-name').value;
-          const email = document.getElementById('cnt-email').value;
-          const subject = document.getElementById('cnt-subject').value;
-          const message = document.getElementById('cnt-msg').value;
-          var body='Name: '+name+'<br>Email: '+email+'<br>Subject: '+subject+'<br>Message: '+message;
-          Email.send({
-              SecureToken : "a667d7aa-ea8f-40af-9330-20b4125fd29c",
-              To : "earthencare1@gmail.com",
-              From : "earthencare1@gmail.com",
-              Subject : "Contact Form",
-              Body : body
-          }).then( message =>{
-              if(message=='OK'){
-                  alert('Your mail has been send. Thank you for connecting.');
-              }
-              else{
-                  console.error (message);
-                  alert('There is error at sending message. Please Check your network') 
-              }
-          });
-      }
-  </script>
 
   <script src="firebase.js"></script>
   <script src="auth.js"></script>

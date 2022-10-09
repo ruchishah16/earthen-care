@@ -43,6 +43,10 @@ const API_KEY = "AIzaSyB0GNJEcSqRStWF6NNuuy7l5lVlJvlq048";
 //     return true;      
 // }
  
+date.min = new Date().toLocaleDateString('en-ca');
+document.getElementById("contact-form").addEventListener("submit",(event)=>{
+    event.preventDefault()
+})
 
 document.getElementById("loginForm").addEventListener("submit",(event)=>{
     event.preventDefault()
@@ -51,7 +55,7 @@ document.getElementById("loginForm").addEventListener("submit",(event)=>{
 function sendMail(){
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    var body = 'Hello '+name+',\nThank You for using EarthenCare Services. We will get back to you soon.'
+    var body = 'Hello '+name+',<br>Thank You for using EarthenCare Services. We will get back to you soon.'
     Email.send({
         SecureToken : "a667d7aa-ea8f-40af-9330-20b4125fd29c",
         To : email,
@@ -64,7 +68,7 @@ function sendMail(){
         }
         else{
             console.error (message);
-            alert('There is error at sending message. ') 
+            alert('There is an error while sending message. ') 
         }
     });
 }
@@ -82,11 +86,11 @@ function login(){
     const date = document.getElementById("date").value;
     const dept = document.getElementById("department").value;
     const doc = document.getElementById("doctor").value;
-    console.log(name,email,phone,date,dept,doc);
+    // console.log(name,email,phone,date,dept,doc);
     if(email && name && phone && dept!="no" && doc!="no" && date && phone.length===10 && (emailPattern.test(email) || emailPattern2.test(email)|| emailPattern3.test(email))){
         document.getElementById("error").innerHTML = "Loading..."
         var provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+        // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
@@ -117,6 +121,29 @@ function login(){
     }else{
         document.getElementById("error").innerHTML = "Invalid Details"
     }
+}
+
+function send(){
+    const name = document.getElementById('cnt-name').value;
+    const email = document.getElementById('cnt-email').value;
+    const subject = document.getElementById('cnt-subject').value;
+    const message = document.getElementById('cnt-msg').value;
+    var body='Name: '+name+'<br>Email: '+email+'<br>Subject: '+subject+'<br>Message: '+message;
+    Email.send({
+        SecureToken : "a667d7aa-ea8f-40af-9330-20b4125fd29c",
+        To : "earthencare1@gmail.com",
+        From : "earthencare1@gmail.com",
+        Subject : "Contact Form",
+        Body : body
+    }).then( message =>{
+        if(message=='OK'){
+            alert('Your mail has been send. Thank you for connecting.');
+        }
+        else{
+            console.error (message);
+            alert('There is error at sending message. Please Check your network') 
+        }
+    });
 }
 
 // function signUp(){

@@ -1,12 +1,11 @@
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBqcuMaxgwgG7tKlZ06_4mDB_bZ2MHWoXE",
-    authDomain: "earthen-care-9198d.firebaseapp.com",
-    projectId: "earthen-care-9198d",
-    storageBucket: "earthen-care-9198d.appspot.com",
-    messagingSenderId: "9915176844",
-    appId: "1:9915176844:web:12eee26c6f5b2d610ea8a9",
-    measurementId: "G-G953LCYSEM"
+    apiKey: "AIzaSyAKOou8jaysljNf4zKoU8WkEvvw4-swtHs",
+    authDomain: "earthen-care-d93fd.firebaseapp.com",
+    projectId: "earthen-care-d93fd",
+    storageBucket: "earthen-care-d93fd.appspot.com",
+    messagingSenderId: "782498992108",
+    appId: "1:782498992108:web:cb29a3ef4ac95a7dd8fac9"
 };
 
 firebase.initializeApp(firebaseConfig);
